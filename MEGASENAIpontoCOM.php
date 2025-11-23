@@ -1,5 +1,6 @@
-
 <?php
+
+    MegaSena();
 
 function menu(): void{
 
@@ -49,9 +50,11 @@ function MegaSena(){
 
     $sort = [];
 
-    #$qntdJgs = readline("\nQuantos Jogos deseja?\n");
-    $qntdDezenas = readline("\nQuantas dezenas para cada jogo? \n");
+    $qntdJgs = readline("Quantos jogos voçê quer jogar? \n");
+    $qntdDezenas = readline("Quantas dezenas para cada jogo? \n");
 
+    for ($i=0; $i < $qntdJgs; $i++) { 
+        
     while(count($sort) < $qntdDezenas){
     if($qntdDezenas < 6 or $qntdDezenas > 20){
         print("Quantidade invalida");
@@ -64,12 +67,13 @@ function MegaSena(){
         }
     }
     
+    
     sort($sort);
     
     foreach ($sort as $valor) {
         print "$valor - ";
     }
-
+    print("\n");
 }
 
-MegaSena();
+}
