@@ -3,8 +3,6 @@
     const checkspecial = 500;
     $clientes = [];
 
-    cadastroUser();
-
     function menu(): void {
 
     print("|       *BIG-SHOT BANK*       |\n");
@@ -22,17 +20,57 @@
     }
 
 
-    function cadastroUser(){
-        
-        global $clientes;
-        
-        $cliente = [];
-
+    function cadastroUser(&$clientes): bool {
+                
         $nome = readline('Informe seu nome: ' . "\n");
         $cpf = readline('informe seu CPF: ' . "\n");
+        
+        if(isset($clientes[$cpf])){
+            print('Esse CPF já possui cadastro' . "\n");
+            return false;
+        }
+        
+        
         $clientes[$cpf] = [
         'nome' => $nome, 
-        'cpf' => $cpf];
+        'cpf' => $cpf,
+        'contas' => []
+        ];
 
-        var_dump($cliente);
+        return true;
+
     }
+
+    function cadastrarConta(array &$clientes): bool {
+
+        $cpf = readline("Informe seu CPF: ");
+
+        if(!isset($clientes[$cpf])){
+            print "Cliente não possui cadastro \n";
+            return false;
+        }
+
+        $numConta = uniqid();
+
+        $clientes[$cpf]['contas'][$numConta] = [
+            'saldo' => 0,
+            'cheque_especial' => checkspecial,
+            'extrato' => [] 
+        ];
+
+        print "Conta criada com sucesso\n";
+        return true;
+    }
+
+    function depositar($clientes){
+        $cpf = readline("informe seu CPF novamente: ");
+
+        $numConta = readline("Informe o numero da conta: ");
+    }
+
+
+    cadastroUser($clientes);
+    print_r($clientes);
+    
+    cadastrarConta($clientes);
+    print_r($clientes);
