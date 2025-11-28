@@ -17,7 +17,25 @@
     print("[0] - SAIR\n");
     print("Opção: ");
 
+        $opcao = readline();
 
+        switch ($$opcao) {
+            case '1':
+                cadastroUser($clientes);
+                break;
+            case '2':
+                cadastrarConta($clientes);
+                break;
+            case '3':
+                depositar($clientes);
+                break;
+            case '0':
+                print("Saindo...\n");
+                die();
+            default:
+                print("Opção inválida.\n");
+                break;
+        }
     }
 
 
@@ -83,13 +101,8 @@
         return true;
     }
 
+        menu();
 
-    cadastroUser($clientes);
-    print_r($clientes);
-    
-    cadastrarConta($clientes);
-    print_r($clientes);
-    
-    depositar($clientes);
-    print_r($clientes);
+        
 
+    
