@@ -5,6 +5,7 @@
 
     function menu(): void {
 
+    print("===============================\n");
     print("|       *BIG-SHOT BANK*       |\n");
     print("===============================\n");
     print("[1] - CRIAR USER \n");
@@ -50,7 +51,7 @@
             return false;
         }
 
-        $numConta = uniqid();
+        $numConta = rand(10000, 100000);
 
         $clientes[$cpf]['contas'][$numConta] = [
             'saldo' => 0,
@@ -62,10 +63,24 @@
         return true;
     }
 
-    function depositar($clientes){
+    function depositar(array &$clientes){
         $cpf = readline("informe seu CPF novamente: ");
 
         $numConta = readline("Informe o numero da conta: ");
+
+        $valorDeposito = (float) readline("Informe o valor do depósito: ");
+
+        if($valorDeposito <= 0){
+            print "Valor de deposito invalido \n";
+        }
+        
+        $clientes[$cpf]['contas'][$numConta]['saldo'] += $valorDeposito;
+
+        $dataHora = date('d/m/Y H:i');
+        $clientes[$cpf]['contas'][$numConta]['extrato'] = "Deposito de R$ $valorDeposito em $dataHora";
+
+        print "Depósito realizado com sucesso\n";
+        return true;
     }
 
 
@@ -74,3 +89,7 @@
     
     cadastrarConta($clientes);
     print_r($clientes);
+    
+    depositar($clientes);
+    print_r($clientes);
+
