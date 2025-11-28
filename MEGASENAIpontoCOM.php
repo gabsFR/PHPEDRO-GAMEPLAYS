@@ -7,7 +7,6 @@ function menu(): void {
     $continue = true;
 
     do {
-
         print("|           *BIG-SHOT GAMBLING*         |\n");
         print("=========================================\n");
         print("[1] - Mega Sena - 6 a 20\n");
@@ -49,7 +48,6 @@ function menu(): void {
 }
 
 
-
 function MegaSena() {
 
     print("|          *MEGA-SENA*          |\n");
@@ -58,13 +56,13 @@ function MegaSena() {
     $qntdJgs = readline("|QUANTIDADE DE JOGOS: ");
     $qntdDezenas = readline("|QUANTIDADE DE NÚMEROS (6 a 20): ");
 
-    
     if ($qntdDezenas < 6 || $qntdDezenas > 20) {
         print("Quantidade inválida!\n");
         return;
     }
 
     $valorAposta = calcularMega($qntdDezenas);
+    $total = 0;
 
     for ($i = 0; $i < $qntdJgs; $i++) {
 
@@ -80,12 +78,14 @@ function MegaSena() {
         sort($sort);
 
         print("Aposta " . ($i + 1) . ": ");
-        foreach ($sort as $valor) {
-            print "$valor ";
-        }
+        foreach ($sort as $valor) print "$valor ";
 
         print(" | VALOR: R$ " . number_format($valorAposta, 2, ',', '.') . "\n");
+
+        $total += $valorAposta;
     }
+
+    print("VALOR TOTAL GASTO: R$ " . number_format($total, 2, ',', '.') . "\n");
 }
 
 function calcularMega($qtd) {
@@ -126,6 +126,7 @@ function Quina() {
     }
 
     $valorAposta = calcularQuina($qntdDezenas);
+    $total = 0;
 
     for ($i = 0; $i < $qntdJgs; $i++) {
 
@@ -141,18 +142,19 @@ function Quina() {
         sort($sort);
 
         print("Aposta " . ($i + 1) . ": ");
-        foreach ($sort as $valor) {
-            print "$valor ";
-        }
+        foreach ($sort as $valor) print "$valor ";
 
         print(" | VALOR: R$ " . number_format($valorAposta, 2, ',', '.') . "\n");
+
+        $total += $valorAposta;
     }
+
+    print("VALOR TOTAL GASTO: R$ " . number_format($total, 2, ',', '.') . "\n");
 }
 
 function calcularQuina($qtd) {
-   
     $base = 2.50;
-    return $base * ($qtd - 4); 
+    return $base * ($qtd - 4);
 }
 
 
@@ -164,6 +166,7 @@ function Lotomania() {
     $qntdJgs = readline("|QUANTIDADE DE JOGOS: ");
 
     $valorAposta = 3.00;
+    $total = 0;
 
     for ($i = 0; $i < $qntdJgs; $i++) {
 
@@ -179,12 +182,14 @@ function Lotomania() {
         sort($sort);
 
         print("Aposta " . ($i + 1) . ": ");
-        foreach ($sort as $valor) {
-            print "$valor ";
-        }
+        foreach ($sort as $valor) print "$valor ";
 
         print(" | VALOR: R$ " . number_format($valorAposta, 2, ',', '.') . "\n");
+
+        $total += $valorAposta;
     }
+
+    print("VALOR TOTAL GASTO: R$ " . number_format($total, 2, ',', '.') . "\n");
 }
 
 
@@ -202,6 +207,7 @@ function Lotofacil() {
     }
 
     $valorAposta = calcularLotofacil($qntdDezenas);
+    $total = 0;
 
     for ($i = 0; $i < $qntdJgs; $i++) {
 
@@ -217,15 +223,18 @@ function Lotofacil() {
         sort($sort);
 
         print("Aposta " . ($i + 1) . ": ");
-        foreach ($sort as $valor) {
-            print "$valor ";
-        }
+        foreach ($sort as $valor) print "$valor ";
 
         print(" | VALOR: R$ " . number_format($valorAposta, 2, ',', '.') . "\n");
+
+        $total += $valorAposta;
     }
+
+    print("VALOR TOTAL GASTO: R$ " . number_format($total, 2, ',', '.') . "\n");
 }
 
 function calcularLotofacil($qtd) {
+
     $valores = [
         15 => 3.00,
         16 => 48.00,
