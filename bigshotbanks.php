@@ -5,6 +5,8 @@
 
     function menu(): void {
 
+    global $clientes;
+
     print("===============================\n");
     print("|       *BIG-SHOT BANK*       |\n");
     print("===============================\n");
