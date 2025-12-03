@@ -7,6 +7,8 @@
 
     global $clientes;
 
+    while(true){
+
     print("===============================\n");
     print("|       *BIG-SHOT BANK*       |\n");
     print("===============================\n");
@@ -16,12 +18,13 @@
     print("[4] - SACAR \n");
     print("[5] - SALDO\n");
     print("[6] - EXTRATO\n");
+    print("[7] - DADOS\n");
     print("[0] - SAIR\n");
     print("Opção: ");
 
         $opcao = readline();
 
-        switch ($$opcao) {
+        switch ($opcao) {
             case '1':
                 cadastroUser($clientes);
                 break;
@@ -31,6 +34,9 @@
             case '3':
                 depositar($clientes);
                 break;
+            case '4':
+                sacar($clientes);
+                break;
             case '0':
                 print("Saindo...\n");
                 die();
@@ -39,7 +45,7 @@
                 break;
         }
     }
-
+    }
 
     function cadastroUser(&$clientes): bool {
                 
@@ -80,6 +86,7 @@
         ];
 
         print "Conta criada com sucesso\n";
+        print "Numero da conta: #" . $numConta . "\n";
         return true;
     }
 
@@ -101,6 +108,17 @@
 
         print "Depósito realizado com sucesso\n";
         return true;
+    }
+
+    function sacar(&$clientes){
+        $cpf = readline("Informe seu CPF: ");
+        
+        $conta = readline("informe o numero da conta: ");
+        $valorSaque = readline("informe o valor do saque: ");
+
+        if($clientes[$cpf]['contas'][$conta]['saldo'] + checkspecial >= $valorSaque){
+        $clientes[$cpf]['contas'][$conta]['saldo'] -= $valorSaque;
+        }
     }
 
         menu();
