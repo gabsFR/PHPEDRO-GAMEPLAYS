@@ -9,9 +9,9 @@
 
     while(true){
 
-    print("===============================\n");
-    print("|       *BIG-SHOT BANK*       |\n");
-    print("===============================\n");
+    print("================================\n");
+    print("|       *BIG-SHOT BANKS*       |\n");
+    print("================================\n");
     print("[1] - CRIAR USER \n");
     print("[2] - CRIAR CONTA \n");
     print("[3] - DEPOSITAR \n");
@@ -36,6 +36,10 @@
                 break;
             case '4':
                 sacar($clientes);
+                break;
+
+            case '7':
+                consultarCliente($clientes);
                 break;
             case '0':
                 print("Saindo...\n");
@@ -119,9 +123,27 @@
         if($clientes[$cpf]['contas'][$conta]['saldo'] + checkspecial >= $valorSaque){
         $clientes[$cpf]['contas'][$conta]['saldo'] -= $valorSaque;
         }
+
+        $dataHora = date('d/m/Y H:i');
+        $clientes[$cpf]['contas'][$conta]['extrato'][] = "Saque de R$ $valorSaque em $dataHora";
     }
 
-        menu();
+    function extrato(&$clientes){
+
+    }
+    function consultarCliente($clientes){
+
+        $cpf = readline("Informe seu CPF: ");
+        foreach ($clientes as $info) {
+            print($info);
+        }
+
+
+    }
+
+    
+    
+    menu();
 
         
 
