@@ -1,3 +1,4 @@
+
 <?php
 
     const checkspecial = 500;
@@ -37,7 +38,12 @@
             case '4':
                 sacar($clientes);
                 break;
-
+            case '5':
+                saldo($clientes);
+                break;
+            case '6':
+                extrato($clientes);
+                break;
             case '7':
                 consultarCliente($clientes);
                 break;
@@ -85,6 +91,7 @@
 
         $clientes[$cpf]['contas'][$numConta] = [
             'saldo' => 0,
+            'numConta' => $numConta, 
             'cheque_especial' => checkspecial,
             'extrato' => [] 
         ];
@@ -129,22 +136,34 @@
     }
 
     function extrato(&$clientes){
+        $cpf = readline("Informe seu CPF: ");
+        foreach ($clientes[$cpf]['contas'] as $conta) {
+            print "EXTRATO: " . $conta['extrato'] . "\n";
+        }
+    }
 
+    function saldo(&$clientes){
+        $cpf = readline("Informe seu CPF: ");
+        foreach ($clientes[$cpf]['contas'] as $conta) {
+            print "SALDO: " . $conta['saldo'] . "\n";
+        }
     }
     function consultarCliente($clientes){
 
         $cpf = readline("Informe seu CPF: ");
-        foreach ($clientes as $info) {
-            print($info);
+
+        print "NOME: " . ($clientes[$cpf]['nome'] . "\n");
+        print "CPF: " . ($clientes[$cpf]['cpf'] . "\n");
+
+        print "==== CONTAS ====\n";
+        foreach ($clientes[$cpf]['contas'] as $conta) {
+            
+            print "SALDO: " . $conta['saldo'] . "\n";
+            print "NUMERO DA CONTA: " . $conta['numConta'] . "\n";
+            print "CHEQUE ESPECIAL: " . $conta['cheque_especial'] . "\n";
+            print "EXTRATO: " . $conta['extrato'] . "\n";
         }
 
-
+        print "================\n\n";
     }
-
-    
-    
     menu();
-
-        
-
-    
